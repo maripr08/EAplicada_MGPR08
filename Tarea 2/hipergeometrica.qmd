@@ -1,0 +1,64 @@
+---
+title: "Distribución Hipergeométrica"
+lang: es
+author: "MARIANA GUADALUPE PONCE RODRIGUEZ"
+ECONOMÍA INDUSTRIAL
+---
+
+```{=html}
+<style>
+main.content {
+text-align: justify}
+</style>
+```
+
+```{r}
+# Cargar librerías necesarias
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(knitr)
+library(kableExtra)
+```
+
+
+#Planteamiento del problema
+
+Una empresa tiene 50 empleados, de los cuales 20 son mujeres. Si se seleccionan al azar 10 empleados para un proyecto, ¿cuál es la probabilidad de que exactamente 4 de ellos sean mujeres?
+
+```{r}
+
+
+# Función para calcular la distribución hipergeométrica
+hipergeometrica <- function(N, K, n, x) {
+  choose(K, x) * choose(N - K, n - x) / choose(N
+, n)
+}
+# Parámetros de la distribución
+N <- 50  # Tamaño de la población
+K <- 20  # Número de éxitos en la población
+n <- 10  # Tamaño de la muestra
+x <- 0:n  # Número de éxitos en la muestra
+# Calcular probabilidades
+probabilidades <- sapply(x, function(x) hipergeometrica(N, K, n
+, x))
+# Crear un data frame para graficar
+df <- data.frame(x = x, probabilidad = probabilidades)
+# Graficar la distribución hipergeométrica
+ggplot(df, aes(x = x, y = probabilidad)) +
+  geom_bar(stat = "identity", fill = "lightgreen", color = "darkgreen")
+  labs(title = "Distribución Hipergeométrica",
+       x = "Número de éxitos en la muestra (x)",
+       y = "Probabilidad P(X = x)") +
+  theme_minimal()
+  
+```
+
+```{r}
+# Mostrar la tabla de probabilidades
+kable(df, caption = "Tabla de Probabilidades de la Distribución Hipergeométrica
+") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"), full_width = F)
+
+```
+
