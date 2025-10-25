@@ -1,0 +1,38 @@
+project:
+  type: book
+  author: "MARIANA GUADALUPE PONCE RODRIGUEZ"
+
+book:
+  title: "Variables Aleatorias Continuas"
+  author: "Licenciatura en Economía Industrial"
+  chapters:
+    - index.qmd
+    - unif_continua.qmd
+    - exponencial.qmd
+    - gamma.qmd
+    - beta.qmd
+    - normal_bivariada.qmd
+    - normal.qmd
+    - ji_cuadrada.qmd
+    # - weibull.qmd tarea
+    # - dist_t.qmd 30 de septiembre
+    # - dist_f.qmd 30 de septiembre
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+    grid:
+      sidebar-width: 250px
+      body-width: 950px
+      margin-width: 250px
+      gutter-width: 1.5rem
+    code-fold: true
+    fig-width: 8
+    fig-height: 6
+    fig-align: "center"
+
+  
+
+

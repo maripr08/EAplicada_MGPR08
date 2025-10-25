@@ -1,0 +1,98 @@
+---
+title: "Weibull"
+author: "MARIANA GUADALUPE PONCE RODRIGUEZ"
+format: html
+editor: visual
+---
+
+##Weibull Es una distribución de probabilidad continua que puede modelar una variedad de variables aleatorias, como el tiempo hasta un evento o el valor de eventos extremos.
+
+Parámetro de forma ((\alpha )): Determina la forma de la distribución y su tasa de fallos. Parámetro de escala ((\lambda )): Determina la escala de la distribución.
+
+```{r}
+
+library(fitdistrplus)
+library(MASS)
+library(ggplot2)
+library(dplyr)
+library(gridExtra)
+
+n <- 200
+datos <- rweibull(n, shape = 2, scale = 5)  # forma = 2, escala = 5
+
+summary(datos)
+
+p1 <- ggplot(data.frame(x = datos), aes(x)) +
+  geom_histogram(aes(y = ..density..), bins = 20, fill = "pink", color = "black") +
+  geom_density(color = "darkgreen", size = 1.2) +
+  labs(title = "Distribución empírica de los datos", x = "Valor", y = "Densidad") +
+  theme_minimal()
+
+p2 <- ggplot(data.frame(x = datos), aes(y = x)) +
+  geom_boxplot(fill = "steelblue", color = "black") +
+  labs(title = "Boxplot de la variable", y = "Valor") +
+  theme_minimal()
+
+grid.arrange(p1, p2, ncol = 2)
+
+
+# Método de Máxima Verosimilitud
+ajuste <- fitdist(datos, "weibull")
+
+summary(ajuste)
+
+# Parámetros estimados
+forma_est <- ajuste$estimate["shape"]
+escala_est <- ajuste$estimate["scale"]
+
+cat("\nParámetro de forma (k):", forma_est)
+cat("\nParámetro de escala (λ):", escala_est, "\n")
+
+# Gráfico de densidad teórica vs empírica
+x_seq <- seq(min(datos), max(datos), length.out = 200)
+dens_teorica <- dweibull(x_seq, shape = forma_est, scale = escala_est)
+
+ggplot() +
+  geom_histogram(aes(x = datos, y = ..density..),
+                 bins = 20, fill = "yellow", color = "black", alpha = 0.6) +
+  geom_line(aes(x = x_seq, y = dens_teorica), color = "blue", size = 1.2) +
+  labs(title = "Ajuste de la distribución Weibull",
+       x = "Valor", y = "Densidad") +
+  theme_minimal()
+
+par(mfrow = c(2, 2))
+plot(ajuste)
+par(mfrow = c(1, 1))
+
+# La función de supervivencia (S(x)) = exp(-(x/λ)^k)
+Sx <- function(x, k, lambda) exp(-(x/lambda)^k)
+# La función de riesgo (h(x)) = (k/λ) * (x/λ)^(k-1)
+hx <- function(x, k, lambda) (k/lambda) * (x/lambda)^(k-1)
+
+# Curvas de supervivencia y riesgo
+x_vals <- seq(0, max(datos), length.out = 200)
+supervivencia <- Sx(x_vals, forma_est, escala_est)
+riesgo <- hx(x_vals, forma_est, escala_est)
+
+p3 <- ggplot(data.frame(x_vals, supervivencia), aes(x_vals, supervivencia)) +
+  geom_line(color = "darkblue", size = 1.2) +
+  labs(title = "Función de supervivencia Weibull", x = "x", y = "S(x)") +
+  theme_minimal()
+
+p4 <- ggplot(data.frame(x_vals, riesgo), aes(x_vals, riesgo)) +
+  geom_line(color = "darkred", size = 1.2) +
+  labs(title = "Función de riesgo Weibull", x = "x", y = "h(x)") +
+  theme_minimal()
+
+grid.arrange(p3, p4, ncol = 2)
+
+# Pruebas estadísticas
+ks <- ks.test(datos, "pweibull", shape = forma_est, scale = escala_est)
+ad <- gofstat(ajuste)
+
+cat("\n--- Prueba KS ---\n")
+print(ks)
+cat("\n--- Estadísticos de bondad de ajuste ---\n")
+print(ad)
+
+```
