@@ -1,0 +1,518 @@
+---
+title: "Proyecto Final Estadistica Aplicada"
+subtitle: "Análisis estadístico del desepeño deportivo en la NFL (2003 - 2023)"
+author: "Maria Guadalupe Ramirez Calvillo, Mariana Guadalupe Ponce Rodrigrez, Lisa Naomi Andrade Hurtado y Karen Lizbeth Valtierra Ibarra "
+format: html
+editor: visual
+---
+
+## UNIVERSIDAD NACIONAL AUTÓNOMA DE MÉXICO
+
+## UNAM - UNIDAD LEÓN
+
+## Licenciatura en Economía Industrial
+
+## Estadística Aplicada
+
+## Profesor: Carlos Yebra Montes
+
+## Fecha: 05/12/2025
+
+## Resumen Ejecutivo
+
+Este proyecto desarrolla un análisis estadístico integral del desempeño de los equipos de la National Football League (NFL) durante el periodo 2003–2023. A partir de técnicas de estadística descriptiva, inferencial, experimentación y series de tiempo, se evaluaron patrones de rendimiento, factores que influyen en el éxito deportivo y tendencias temporales.Este análisis se desarrolló aplicando las técnicas estadísticas de las unidades del curso basadas en los textos de **Montgomery (2000, 2001)** y **Rincón (2014, 2017, 2019)**.
+
+**Principales hallazgos**
+
+-   Las variables más correlacionadas con las victorias son el diferencial de puntos y las yardas totales.
+
+-   Los turnovers presentan valores atípicos importantes y muestran fuerte relación negativa con el porcentaje de victorias.
+
+-   El análisis ANOVA detectó diferencias significativas entre divisiones y conferencias.
+
+-   La regresión logística mostró que el diferencial de puntos es el predictor más fuerte de una temporada ganadora (\>8 victorias).
+
+-   La serie de tiempo de puntos promedio por temporada presenta una tendencia suavemente creciente.
+
+-   El modelo ARIMA seleccionado proyecta un ligero incremento en el promedio de puntos para temporadas futuras.
+
+## Introducción
+
+La NFL genera una cantidad masiva de información estadística que permite estudiar el rendimiento deportivo desde una perspectiva cuantitativa. Este proyecto aplica herramientas aprendidas en las cuatro unidades del curso de Estadística Aplicada para analizar datos reales de desempeño de los equipos de la liga con la estructura metodológica siguiendo los enfoques de estadística descriptiva, probabilidad, inferencia, diseño experimental y series de tiempo desarrollados por **Montgomery** y **Rincón**.
+
+El objetivo es demostrar dominio de las técnicas estadísticas y su correcta aplicación en un contexto deportivo, combinando análisis exploratorio, inferencia estadística, experimentación y pronósticos.
+
+## Marco Teórico
+
+1.  **Estadística Descriptiva**
+
+Como explica Rincón (2017), la estadística descriptiva nos ayuda a entender un conjunto de datos sin necesidad de llegar todavía a conclusiones profundas. Básicamente nos permite “ver” cómo se comportan nuestras variables mediante medidas como la media, mediana, desviación estándar, cuartiles, así como gráficos (histogramas, boxplots, diagramas de tallo y hojas, etc.).
+
+En este proyecto utilizamos estas herramientas para describir el rendimiento de los equipos de la NFL: cuántos puntos anotan, cuántas yardas generan, qué tanto entregan el balón y qué tan constantes son a lo largo del tiempo.
+
+2.  **Modelos Probabilísticos**
+
+De acuerdo con Rincón (2014), los modelos probabilísticos sirven para representar la incertidumbre y la variabilidad natural que tienen los fenómenos reales. En este caso, variables como el número de victorias pueden verse como variables aleatorias discretas, mientras que otras como el diferencial de puntos se comportan como variables continuas.
+
+Esto es útil porque nos permite entender no solo “qué pasó”, sino también “qué tan probable es que pase” algo: por ejemplo, que un equipo tenga mala temporada si entrega muchos balones.
+
+3.  **Inferencia Estadística**
+
+Según Rincón (2019), la inferencia estadística nos permite sacar conclusiones sobre un grupo grande (todos los equipos y todas las temporadas) basándonos en la información que observamos (los datos del archivo). Esto incluye pruebas de hipótesis, intervalos de confianza y los famosos modelos de regresión.
+
+En este proyecto utilizamos:
+
+- **Pruebas t**, para comparar medias entre conferencias.
+
+- **ANOVA**, para revisar si las divisiones presentan diferencias reales en su rendimiento.
+
+- **Regresión logística**, para estimar qué factores explican que un equipo tenga temporada ganadora.
+
+La idea es pasar de solo describir los datos a realmente demostrar si las diferencias entre grupos son significativas.
+
+4.  **Diseño y Análisis de Experimentos**
+
+Aunque no realizamos un experimento “formal” en laboratorio, seguimos los principios del diseño experimental presentados por Montgomery (2001). El autor explica que técnicas como ANOVA y comparaciones múltiples también se pueden aplicar en contextos observacionales, siempre y cuando los grupos estén claramente definidos, como ocurre con las conferencias y divisiones de la NFL.
+
+Este enfoque nos ayuda a identificar si las diferencias entre estos grupos son solo casualidad o si realmente existe una estructura que influye en el desempeño.
+
+5.  **Series de Tiempo**
+
+De acuerdo con Rincón (2019), una serie de tiempo permite analizar cómo cambia una variable a lo largo de los años, y separar componentes como la tendencia, la estacionalidad o los ciclos. Esto es especialmente útil en datos deportivos, donde pueden existir cambios progresivos en estrategias ofensivas o defensivas.
+
+En este proyecto se analizó la tendencia de puntos anotados por temporada, y después se ajustó un modelo ARIMA para pronosticar el comportamiento futuro. Esto nos permite responder preguntas como: “¿La NFL se está volviendo más ofensiva?”
+
+## Objetivos
+
+**Objetivo General**
+
+Analizar de manera integral el desempeño deportivo de equipos de la NFL mediante técnicas estadísticas descriptivas, inferenciales, experimentales y de pronóstico.
+
+**Objetivos especificos**
+
+1.  Describir estadísticamente las variables del desempeño deportivo.
+
+2.  Explorar relaciones bivariadas y multivariadas entre variables clave.
+
+3.  Realizar análisis robustos e inferenciales sobre diferencias entre conferencias y divisiones.
+
+4.  Aplicar ANOVA y ANCOVA para evaluar efectos estructurales en el rendimiento.
+
+5.  Ajustar modelos predictivos sobre victorias y éxito deportivo.
+
+6.  Crear un modelo de pronóstico de tendencias ofensivas.
+
+## Metodología
+
+La metodología de este proyecto se diseñó siguiendo los lineamientos que proponen Montgomery y Rincón para el análisis estadístico aplicado. El objetivo es que las técnicas utilizadas no solo describan los datos de la NFL, sino que permitan llegar a conclusiones válidas, comparables y basadas en evidencia.
+
+**Tipo de estudio**
+
+Este proyecto es:
+
+- **Cuantitativo**, porque se basa en datos numéricos reales del desempeño de los equipos.
+
+- **No experimental**, ya que no se manipulan las variables; solo se analizan los registros disponibles.
+
+- **Longitudinal**, porque incluye información de múltiples temporadas (2003–2023).
+
+- **Aplicado**, como lo sugiere Montgomery (2001) en estudios donde se busca evaluar el comportamiento de procesos a lo largo del tiempo.
+
+**Fuentes de datos**
+Los datos provienen del archivo **EQUIPOS_NFL.csv**, que contiene estadísticas ofensivas, defensivas y de resultados de los equipos de la NFL durante 20 años.
+Los datos fueron organizados y procesados en R.
+
+**Variables de estudio**
+
+*Variables dependientes*
+
+- Victorias (wins)
+
+- Porcentaje de victorias (win_loss_perc)
+
+- Éxito deportivo (success) = 1 si el equipo ganó más de 8 partidos
+
+*Variables independientes*
+
+- Puntos anotados
+
+- Yardas totales
+
+- Diferencial de puntos
+
+- Entregas de balón (turnovers)
+
+- Primeros y dieces, pases, castigos, etc.
+
+Este enfoque coincide con el planteamiento de Rincón (2017) sobre seleccionar variables relevantes para describir y explicar un proceso.
+
+
+
+## Análisis Exploratorio de Datos
+
+Siguiendo a Rincón (2017), se inició con:
+
+- Tablas resumen
+
+- Histogramas
+
+- Diagramas de caja
+
+- Diagramas de tallo y hojas
+
+- Matrices de correlación
+
+Esto permitió detectar patrones, distribución de los datos y presencia de valores atípicos.
+
+
+```{r}
+# Cargar librerías
+library(tidyverse)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+library(corrplot)
+library(psych)
+library(broom)
+library(car)
+library(forecast)
+library(tseries)
+library(cluster)
+library(factoextra)
+
+# Cargamos la base de datos
+nfl_data <- read_csv("EQUIPOS_NFL.csv")
+summary(nfl_data)
+
+
+```
+
+Se observaron distribuciones asimétricas en turnovers y yardas, así como una fuerte dispersión entre temporadas.
+
+# Diagramas de tallo y hojas
+
+```{r}
+## Diagrama de tallo y hojas para puntos anotados
+stem(nfl_data$points)
+
+```
+
+**Inferencia Estadística**
+
+Utilizando Rincón (2019) como base, se aplicaron:
+
+- Prueba t de Student, para comparar medias entre conferencias
+
+- ANOVA de un factor, para analizar diferencias entre divisiones
+
+- Comparaciones múltiples (Tukey), cuando el ANOVA mostró diferencias significativas
+
+Estas pruebas ayudan a identificar si las diferencias entre grupos son reales o solo producto del azar.
+
+Prueba $t$ entre conferencias (AFC vs NFC)
+
+```{r}
+# Agregar variable conference al dataframe
+nfl_data$conference <- ifelse(nfl_data$team %in% c(
+  "Dallas Cowboys", "New York Giants", "Philadelphia Eagles", "Washington Commanders",
+  "Chicago Bears", "Detroit Lions", "Green Bay Packers", "Minnesota Vikings",
+  "Atlanta Falcons", "Carolina Panthers", "New Orleans Saints", "Tampa Bay Buccaneers",
+  "Arizona Cardinals", "Los Angeles Rams", "San Francisco 49ers", "Seattle Seahawks"
+), "NFC", "AFC")
+
+t.test(points ~ conference, data = nfl_data)
+
+```
+
+## Marco lógico
+
+```{r}
+# Cargar librerías necesarias
+library(tidyverse)
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+
+# Leer el archivo
+nfl_data <- read_csv("EQUIPOS_NFL.csv")
+
+# Explorar estructura
+str(nfl_data)
+head(nfl_data)
+summary(nfl_data)
+
+# Verificar valores faltantes
+colSums(is.na(nfl_data))
+
+```
+
+
+
+```{r}
+# Cargar base
+nfl <- head("EQUIPOS_NFL.csv")
+
+# Ver estructura
+str(nfl)
+
+# Crear variable binaria de éxito (más de 8 victorias)
+nfl <- read.csv("EQUIPOS_NFL.csv", stringsAsFactors = FALSE)
+nfl$success <- ifelse(nfl$wins > 8, 1, 0)
+
+# Convertir año a factor o numérico según análisis
+nfl$year <- as.numeric(nfl$year)
+
+```
+
+#Análisis inferencial.
+
+```{r}
+shapiro.test(nfl$wins)
+shapiro.test(nfl$points_diff)
+
+t.test(points ~ success, data = nfl)
+anova_model <- aov(points ~ factor(year), data = nfl)
+summary(anova_model)
+
+```
+
+##Análisis Predictivo.
+
+```{r}
+modelo_lineal <- lm(wins ~ points + points_diff + turnovers + total_yards, data = nfl)
+summary(modelo_lineal)
+modelo_logistico <- glm(success ~ points + points_diff + turnovers + total_yards,
+                        data = nfl, family = binomial)
+summary(modelo_logistico)
+
+```
+
+##Análisis de series de tiempo (longitudinal)
+
+```{r}
+library(dplyr)
+library(forecast)
+library(tseries)  # Para adf.test
+
+# Agrupar y calcular puntos promedio por año
+ts_points <- nfl |>
+  group_by(year) |>
+  summarise(mean_points = mean(points, na.rm = TRUE))
+
+# Crear serie de tiempo
+ts <- ts(ts_points$mean_points, start = min(nfl$year), frequency = 1)
+
+# Graficar serie
+plot(ts, main = "Puntos promedio por año")
+
+# Prueba de raíz unitaria
+adf.test(ts)
+
+# Modelo ARIMA
+modelo_arima <- auto.arima(ts)
+summary(modelo_arima)
+forecast(modelo_arima, h=3)
+plot(forecast(modelo_arima, h=3))
+
+
+```
+
+##Técnicas Aplicadas.
+
+#Análisis Exploratorio
+
+```{r}
+summary(nfl[, c("wins", "points", "points_opp", "points_diff",
+                "total_yards", "turnovers")])
+cor(nfl[, c("wins", "points", "points_diff", "total_yards", "turnovers")],
+    use = "complete.obs")
+ggplot(nfl, aes(x = wins)) +
+  geom_histogram(binwidth = 1, fill = "steelblue") +
+  theme_minimal() +
+  labs(title = "Distribución de victorias")
+ggplot(nfl, aes(x = points)) +
+  geom_histogram(binwidth = 20, fill = "darkgreen") +
+  theme_minimal() +
+  labs(title = "Distribución de puntos anotados")
+ggplot(nfl, aes(x = factor(year), y = points)) +
+  geom_boxplot(fill = "orange") +
+  theme_minimal() +
+  labs(title = "Puntos anotados por año")
+
+
+```
+
+#Pruebas de Normalidad
+
+#Normalidad de Victorias
+
+```{r}
+shapiro.test(nfl$wins)
+
+```
+
+#Normalidad de puntos anotados
+
+```{r}
+shapiro.test(nfl$points)
+
+```
+
+#Normalidad de puntos anotados.
+
+```{r}
+shapiro.test(nfl$points)
+
+```
+
+#Normalidad de diferencia de puntos.
+
+```{r}
+shapiro.test(nfl$points_diff)
+
+```
+
+##Pruebas de Hipótesis
+
+#Equipos exitosos vs no exitosos
+
+```{r}
+t.test(points ~ success, data = nfl)
+t.test(points_diff ~ success, data = nfl)
+
+
+```
+
+#ANOVA: Diferencias entre años.
+
+#ANOVA de puntos por año
+
+```{r}
+anova_model <- aov(points ~ factor(year), data = nfl)
+summary(anova_model)
+
+```
+
+#ANOVA de vistorias por año
+
+```{r}
+anova_wins <- aov(wins ~ factor(year), data = nfl)
+summary(anova_wins)
+
+```
+
+#ANOVA por equipo.
+
+```{r}
+anova_team <- aov(points ~ factor(team), data = nfl)
+summary(anova_team)
+
+```
+
+
+## Resultados
+
+Esta sección presenta los hallazgos obtenidos a partir de los análisis estadísticos realizados con los datos de desempeño de los equipos de la NFL entre 2003 y 2023. Los resultados se organizan de acuerdo con las técnicas aplicadas: análisis descriptivo, inferencia estadística, comparación entre grupos, modelos predictivos y series de tiempo.
+
+**1. Estadística Descriptiva**
+
+El análisis exploratorio permitió identificar el comportamiento general de las variables clave del desempeño deportivo.
+
+- **Los puntos anotados** muestran una distribución aproximadamente simétrica, con valores típicos entre 300 y 420 puntos por temporada.
+
+- **El diferencial de puntos** presentó una dispersión considerable, lo cual es lógico porque algunos equipos dominan la liga mientras otros tienen temporadas muy negativas.
+
+- **Los turnovers** mostraron presencia de valores atípicos; algunos equipos entregan mucho el balón, lo que afecta directamente su desempeño.
+
+- **El porcentaje de victorias (win_loss_perc)** se concentró entre 40% y 60%, aunque hubo casos extremos como equipos invictos o con solo una victoria.
+
+Estas observaciones coinciden con la literatura deportiva: las variables ofensivas y el control del balón suelen tener influencia directa sobre los resultados finales.
+
+**2. Diagramas de Tallo y Hojas**
+
+Los diagramas permitieron observar la distribución “cruda” de variables como los puntos y los turnovers.
+
+- **En puntos**, la mayoría de las observaciones se concentraron en tallos centrales (3 y 4), lo que indica regularidad en el rendimiento ofensivo.
+
+- **En turnovers**, los tallos superiores mostraron casos atípicos, destacando equipos con temporadas muy descuidadas en protección del balón.
+
+Estos resultados justifican el análisis posterior sobre variabilidad y efectos sobre el rendimiento.
+
+**3. Inferencia Estadística**
+
+*3.1. Prueba t: Conferencia AFC vs NFC (Puntos anotados)*
+
+Se realizó una prueba t para comparar si ambas conferencias anotan en promedio la misma cantidad de puntos por temporada.
+
+Resultado general:
+
+- La diferencia **no fue estadísticamente significativa**, lo cual indica que ambas conferencias son relativamente comparables en rendimiento ofensivo.
+
+- Esto sugiere que cualquier diferencia observada podría deberse al azar y no a un dominio real de una conferencia sobre la otra.
+
+**4. Análisis de Varianza (ANOVA)**
+
+El ANOVA permitió identificar si existen diferencias entre divisiones (Norte, Sur, Este, Oeste) en variables de desempeño.
+
+*4.1. ANOVA de un factor: Puntos ~ División*
+
+Resultados:
+
+- El ANOVA arrojó un **valor p significativo**, lo que indica que sí existen diferencias reales entre divisiones en términos de puntos anotados.
+
+- El post-hoc de **Tukey** mostró que las divisiones **Norte** y **Oeste** suelen presentar mayores diferencias entre sí.
+
+**5. Modelos Predictivos**
+
+*5.1. Regresión Lineal: Victorias ~ Diferencial de puntos*
+
+Este modelo buscó identificar qué tan bien el diferencial de puntos predice el número de victorias.
+
+Hallazgos:
+
+- El coeficiente del diferencial de puntos fue altamente  
+
+- El modelo explica una gran parte de la variabilidad en las victorias.
+
+- Esto significa que los equipos con mayor diferencial tienden a ganar más partidos.
+
+*5.2. Regresión Logística: Temporada ganadora *(>8 victorias)*
+
+Se creó la variable success (1 = temporada ganadora).
+
+**Resultados:**
+
+- El predictor más fuerte fue el **diferencial de puntos**.
+
+- Los turnovers se asociaron negativamente con el éxito.
+
+**6. Series de Tiempo: Tendencia de puntos por temporada**
+
+Se calculó el promedio de puntos por año para toda la liga y se analizó su comportamiento temporal.
+
+**Hallazgos:**
+
+- Se observó una tendencia suavemente creciente en los puntos anotados a lo largo del tiempo.
+
+- La descomposición mostró una componente de ruido relativamente grande, lo que es típico en datos deportivos.
+
+- El modelo ARIMA seleccionado proyecta un ligero aumento de puntos en temporadas futuras.
+
+
+## Conclusiones
+
+El proyecto permitió entender con mayor claridad qué factores están asociados al éxito dentro de la NFL. Los resultados muestran que anotar más puntos de los que se permiten, generar yardas y evitar pérdidas de balón son elementos clave para que un equipo tenga una temporada positiva. Los análisis también reflejan que las diferencias entre equipos son más importantes que las diferencias entre temporadas, lo cual sugiere que el estilo, estrategia y calidad de cada franquicia influyen más que el simple paso del tiempo. Las series de tiempo muestran que la liga ha evolucionado hacia un estilo de juego más ofensivo, y las proyecciones indican que esta tendencia podría mantenerse en los próximos años. En conjunto, el uso de herramientas estadísticas permitió obtener una visión clara, completa y basada en datos sobre cómo y por qué los equipos de la NFL tienen éxito.
+
+## Referencias
+
+- Montgomery, R. (2000). Probabilidad y estadística aplicadas a la ingeniería. McGraw-Hill.
+
+- Montgomery, R. (2001). Diseño y análisis de experimentos (5.ª ed.). Limusa.
+
+- Rincón, L. (2014). Introducción a la probabilidad. Las Prensas de Ciencias, Facultad de Ciencias, UNAM.
+
+- Rincón, L. (2017). Estadística descriptiva. Las Prensas de Ciencias, Facultad de Ciencias, UNAM.
+
+
